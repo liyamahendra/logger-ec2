@@ -1,0 +1,34 @@
+{
+	"dev": {
+		"role": "arn:aws:iam::660807559148:role/lambda_cbs_execution",
+		"deploymentBucket": "unity-project-dev",
+		"region": "us-east-1",
+		"subnetIds-1": "subnet-28a93574",
+		"subnetIds-2": "subnet-3fb32d11",
+		"securityGroupIds-1": "sg-f97bc9b9"
+	},
+	"staging": {
+		"role": "arn:aws:iam::945087978355:role/lambda_cbs_execution",
+		"deploymentBucket": "unity-project",
+		"region": "us-east-1",
+		"subnetIds-1": "subnet-f498dacb",
+		"subnetIds-2": "subnet-49dfe82d",
+		"securityGroupIds-1": "sg-a0b7c1ea"
+	},
+	"qa": {
+		"role": "arn:aws:iam::660807559148:role/lambda_cbs_execution",
+		"deploymentBucket": "unity-project-qa",
+		"region": "us-east-1",
+		"subnetIds-1": "subnet-28a93574",
+		"subnetIds-2": "subnet-3fb32d11",
+		"securityGroupIds-1": "sg-f97bc9b9"
+	},
+	"prod": {
+		"role": "arn:aws:iam::945087978355:role/lambda_cbs_execution",
+		"deploymentBucket": "unity-project",
+		"region": "us-east-1",
+		"subnetIds-1": "subnet-49dfe82d",
+		"subnetIds-2": "subnet-5e6d2c71",
+		"securityGroupIds-1": "sg-085e9e1fce1615d8b"
+	}
+}

@@ -1,0 +1,40 @@
+service: request-logger
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'qa'}
+  runtime: nodejs8.10
+  deploymentBucket: ${file(./config/deployment.json):${self:provider.stage}.deploymentBucket}
+  stackName: ${self:provider.stage}-${self:service}
+  region: ${file(./config/deployment.json):${self:provider.stage}.region}
+  role: ${file(./config/deployment.json):${self:provider.stage}.role}
+  timeout: 30
+  memorySize: 128
+  environment: 
+    ENV: ${self:provider.stage}
+    GROUP: ${self:service}
+    SERVICE: ${self:service}
+  tags:
+    ENV: ${self:provider.stage}
+    GROUP: ${self:service}
+    AUTHOR: liya
+
+resources:
+    Resources:
+        AccessLogs:
+            Type: AWS::Logs::LogGroup
+            Properties:
+                LogGroupName: ${self:provider.stage}-${self:service}
+
+functions:
+  index:
+    name: ${self:provider.stage}-${self:service}
+    handler: index.handler
+    vpc:
+        securityGroupIds:
+            - ${file(./config/deployment.json):${self:provider.stage}.securityGroupIds-1}
+        subnetIds:
+            - ${file(./config/deployment.json):${self:provider.stage}.subnetIds-1}
+            - ${file(./config/deployment.json):${self:provider.stage}.subnetIds-2}
+        tags:
+            SERVICE: logger-services 
